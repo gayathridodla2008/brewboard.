@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BrewBoard - ZeroQueue Campus Canteen Hack</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Outfit', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            canteen: {
+              orange: '#f97316',
+              amber: '#f59e0b',
+              dark: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen selection:bg-orange-500 selection:text-white">
+
+  <!-- Master Hackathon Demo Top Bar -->
+  <nav class="bg-slate-900 border-b border-slate-800 px-4 py-2.5 sm:px-6 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Status -->
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center text-white font-black text-sm shadow-md shadow-orange-500/20">
+          BB
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="font-black text-base tracking-tight text-white">BrewBoard</span>
+          <span class="hidden sm:inline-block text-[11px] font-bold px-2 py-0.5 rounded-md bg-orange-500/10 text-orange-400 border border-orange-500/20">
+            ZeroQueue Hack
+          </span>
+        </div>
+      </div>
+
+      <!-- Role / Screen Switcher Tabs -->
+      <div class="flex items-center p-1 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs font-bold">
+        <button 
+          data-view-target="kiosk" 
+          class="px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 bg-orange-500 text-white shadow-md"
+        >
+          <span>📱 Student Kiosk</span>
+        </button>
+        <button 
+          data-view-target="wall" 
+          class="px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 text-slate-400 hover:text-white"
+        >
+          <span>📺 Wall Display</span>
+        </button>
+        <button 
+          data-view-target="kitchen" 
+          class="px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 text-slate-400 hover:text-white"
+        >
+          <span>👨‍🍳 Kitchen Console</span>
+        </button>
+        <button 
+          data-view-target="split" 
+          class="hidden md:flex px-3.5 py-1.5 rounded-xl transition items-center gap-1.5 text-slate-400 hover:text-white"
+          title="Side-by-side Kiosk & Wall Display"
+        >
+          <span>🔀 Split Demo</span>
+        </button>
+      </div>
+
+      <!-- Demo Control Helpers -->
+      <div class="flex items-center gap-2">
+        <!-- 1-Tap Hackathon Demo Order Flow -->
+        <button 
+          id="btnRunDemoFlow"
+          class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 active:scale-95 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition flex items-center gap-1.5"
+          title="Auto-run Cold Coffee + Ice Cream order and jump to Wall Display"
+        >
+          <span>⚡ Auto-Demo</span>
+        </button>
+
+        <!-- Test Chime -->
+        <button 
+          id="btnTestAudioChime"
+          class="hidden sm:flex px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 transition"
+          title="Test Web Audio Chime & Speech"
+        >
+          <span>🔔 Test Audio</span>
+        </button>
+
+        <!-- Reset Demo -->
+        <button 
+          id="btnResetDemoData"
+          class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs font-semibold border border-slate-700 transition"
+          title="Reset orders and token queue to default"
+        >
+          <span>🔄 Reset</span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Single View Container (Kiosk, Wall, or Kitchen) -->
+  <div id="singleViewContainer" class="w-full"></div>
+
+  <!-- Split Screen Container (Side-by-Side Presentation Mode) -->
+  <div id="splitContainer" class="hidden min-h-[calc(100vh-57px)] grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-slate-800">
+    <!-- Left: Kiosk -->
+    <div id="splitKioskView" class="h-full overflow-y-auto"></div>
+    <!-- Right: Wall Display -->
+    <div id="splitWallView" class="h-full overflow-y-auto bg-slate-950"></div>
+  </div>
+
+  <!-- Main JavaScript Bootstrap (Zero-dependency standalone bundle works with file:// and http://) -->
+  <script src="js/bundle.js"></script>
+</body>
+</html>
